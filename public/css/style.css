@@ -39,10 +39,12 @@ a {
 }
 
 body {
-  background-image: url(../Public/img/bg.jpg);
+  background-image: url(../../img/giay.jpg);
   background-size: cover;
   background-position: center;
   justify-items: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .wrapper {
@@ -110,7 +112,7 @@ body {
 
 .form-box h3 {
   font-size: 2em;
-  color: #162938;
+  color: #fff;
   text-align: center;
 }
 
@@ -128,7 +130,7 @@ body {
   left: 5px;
   transform: translateY(-50%);
   font-size: 1em;
-  color: #162938;
+  color: #fff;
   font-weight: 500;
   pointer-events: none;
   transition: 0.5s;
@@ -155,13 +157,13 @@ body {
   position: absolute;
   right: 8px;
   font-size: 1.2em;
-  color: #001a00;
+  color: #fff;
   line-height: 57px;
 }
 
 .remember-forgot {
   font-size: 0.9em;
-  color: #162938;
+  color: #fff;
   font-weight: 500;
   margin: -15px 0 15px;
   display: flex;
@@ -173,7 +175,7 @@ body {
 }
 
 .remember-forgot a {
-  color: #162938;
+  color: #fff;
   text-decoration: none;
 }
 

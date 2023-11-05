@@ -39,7 +39,9 @@
     />
   </head>
   <body>
-    
+  <?php
+    include_once('./partial/navbar.php')
+    ?>
  <div class='wrapper'>
  <div class="wrapper-register">
     <div class="form-box register">

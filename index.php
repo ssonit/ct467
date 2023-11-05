@@ -46,7 +46,7 @@ require_once './config/database.php';
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/style.css"
+      href="./public/css/style.css"
     />
   </head>
   <body>

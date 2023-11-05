@@ -32,8 +32,8 @@
                     </li>
                     <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#resetPWModal" >Đổi mật khẩu</a></li>
                     <li id='logout'>
-                      <form method="POST" action="/logout.php" >
-                        <button type="submit" class="w-100 text-start px-3" style="border: 0; background-color: white;">Đăng xuất</button>
+                      <form method="POST" action="./login.php" >
+                        <button type="submit" class="w-100 text-start px-3" style="border: 0; background-color: white;">Đăng nhập</button>
                       </form>
                     </li>
                   </ul>

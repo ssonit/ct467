@@ -39,12 +39,14 @@
     />
   </head>
   <body>
-    
+  <?php
+    include_once('./partial/navbar.php')
+    ?>
   <div class='wrapper'>
   <div class="wrapper-login">
     <div class="form-box login">
         <h3 class="text-center">Login</h3>
-        <form action="#" method="POST">
+        <form action="./contact/contac.php" method="POST">
             <div class="input-box">
                 <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
                 <input type="text" name="username" required>
@@ -62,7 +64,7 @@
             <button type="submit" class="btn" name="login">Login</button>
             <div class="login-register">
                 <p>Don't have an account?
-                    <a href="/projectct467/register.php" class="register-link">Register</a>
+                    <a href="./register.php" class="register-link">Register</a>
                 </p>
             </div>
         </form>
