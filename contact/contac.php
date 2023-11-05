@@ -54,3 +54,7 @@ if (isset($_POST['Register'])) {
         echo '<script>window.open("../register.php","_self")</script>';
     }
 }
+
+if (isset($_GET['delete'])) {
+    $id = $_POST['id'];
+}

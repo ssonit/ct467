@@ -3,7 +3,7 @@
         <div class="d-flex align-items-center py-3 justify-content-between">
           <div  class="d-flex align-items-center">
             <div  class="logo gradient-text" style='margin-right: 60px;'>
-            <a href="/projectct467/" style='text-decoration: none'>SPing</a>
+            <a href="../index.php" style='text-decoration: none'>SPing</a>
         </div>
             <div class="input-group d-none d-md-flex">
               <input autocomplete="off" type="text" class="form-control rounded" placeholder="Tìm kiếm"/>
@@ -13,7 +13,7 @@
             <div  class="">
               <ul class="nav">
                 <li class="nav-item rounded-2 d-flex align-items-center">
-                <a  href="/projectct467/order.php" style='text-decoration: none'>Quản lý đơn hàng</a>
+                <a  href="../order.php" style='text-decoration: none'>Quản lý đơn hàng</a>
                 </li>
 
                 <li  class="nav-item rounded-2 dropdown">
