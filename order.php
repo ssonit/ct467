@@ -1,3 +1,21 @@
+<?php
+
+session_start();
+require_once './config/database.php';
+require_once './models/Order.php';
+
+$orderModel = new Order($pdo);
+
+$user = $_SESSION['user'];
+
+$userId = $user['id'];
+
+$orders = $orderModel->getOrders($userId);
+
+
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -51,23 +69,31 @@
     <tr class='bg-primary'>
       <th scope="col">#</th>
       <th scope="col">Tên sản phẩm</th>
+      <th scope="col">Giá</th>
       <th scope="col">Số lượng</th>
+      <th scope="col">Tổng</th>
       <th scope="col">Ngày tạo</th>
       <th scope="col"></th>
 
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>1</td>
-      <td>15-02-2023</td>
-      <td>
-      <button type="button" class="btn btn-primary">Cập nhật</button>
-      <button type="button" class="btn btn-danger">Xóa</button>
-      </td>
-</tr>
+    <?php
+        foreach ($orders as $key => $order) {
+            echo "<tr>";
+            echo "<th scope='row'>" . $key + 1 . "</th>";
+            echo "<td>" . $order['name'] . "</td>";
+            echo "<td>" . $order['price'] . "</td>";
+            echo "<td>" . $order['quantity'] . "</td>";
+            echo "<td>" . $order['quantity'] * $order['price'] . "</td>";
+            echo "<td>" . $order['createdAt'] . "</td>";
+            echo "<td>
+            <button type='button' class='btn btn-primary'>Cập nhật</button>
+            <button type='button' class='btn btn-danger'>Xóa</button>
+            </td>";
+            echo "</tr>";
+        }
+        ?>
   </tbody>
 </table>
     </div>

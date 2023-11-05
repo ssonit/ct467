@@ -1,8 +1,16 @@
 <?php
 
 session_start();
-
 require_once './config/database.php';
+require_once './models/User.php';
+
+$userModel = new User($pdo);
+
+$user = $userModel->getById(1);
+
+$_SESSION['user'] = $user;
+
+
 
 ?>
 
@@ -53,7 +61,36 @@ require_once './config/database.php';
     <?php
     include_once('./partial/navbar.php')
     ?>
-   
+    <h1 class='text-center'>Sản phẩm</h1>
+        <div class="container row mx-auto p-3">
+            <?php 
+            $query = 'SELECT * FROM product';
+            $sth = $pdo->query($query);
+            while($row=$sth->fetch()){
+            ?>
+            <div class="card col-3" style="width: 18rem;">
+                <img class="card-img-top mt-2" style="border-radius: 10px" src="images/<?=htmlspecialchars($row['image'])?>">
+                <div class="card-body">
+                    <div class="box-title">
+                        <h5 class="card-title"><?=htmlspecialchars($row['name'])?></h5>
+                    </div>
+                                
+                    <div class="box-text">
+                        <p class=" pl-1"><?=htmlspecialchars($row['price'])?> VND</p>
+                        <div>
+                        <?php
+                            $id = htmlspecialchars($row['id']);
+                            echo "<button class='btn-primary' data-product-id=$id id='create_order_button'>Mua luôn</button>";
+                        ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php }?>
+       </div>
+       <div id="toast" style="display:none; background-color: #333; color: white; padding: 10px; position: fixed; top: 10px; right: 10px; z-index: 999;">
+        Đơn hàng đã được tạo!
+    </div>
 
     <!-- jquery -->
     <script
@@ -77,6 +114,25 @@ require_once './config/database.php';
     <!-- js -->
     <script type="text/javascript">
      
+    </script>
+
+<script>
+        $(document).ready(function() {
+            $('#create_order_button').click(function() {
+              const productId = $(this).data('product-id');
+                $.ajax({
+                    type: 'POST',
+                    url: 'add_order.php',
+                    data: { productId }, 
+                    success: function(response) {
+                        $('#toast').show();
+                        setTimeout(function() {
+                            $('#toast').hide();
+                        }, 3000);
+                    }
+                });
+            });
+        });
     </script>
   </body>
 </html>
