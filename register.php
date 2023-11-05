@@ -46,7 +46,7 @@
  <div class="wrapper-register">
     <div class="form-box register">
         <h3 class="text-center">Register</h3>
-        <form action="#" method="POST">
+        <form action="./contact/contac.php" method="POST">
             <div class="input-box">
                 <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
                 <input type="text" name="username" required>
@@ -61,6 +61,11 @@
                 <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
                 <input type="text" name="phone" required>
                 <label>Phone</label>
+            </div>
+            <div class="input-box">
+                <span class="icon"><ion-icon name="location-outline"></ion-icon></span>
+                <input type="text" name="address" required>
+                <label>Address</label>
             </div>
             <div class="input-box">
                 <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
@@ -78,7 +83,7 @@
             <button type="submit" class="btn" name="Register">Register</button>
             <div class="login-register">
                 <p>Already have an account?
-                    <a href="/projectct467/login.php" class="login-link">Login</a>
+                    <a href="index.php?Register" class="login-link">Login</a>
                 </p>
             </div>
         </form>
