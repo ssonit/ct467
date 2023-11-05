@@ -53,7 +53,37 @@ require_once './config/database.php';
     <?php
     include_once('./partial/navbar.php')
     ?>
-   
+    <h1 class='text-center'>Sản phẩm</h1>
+        <div class="container row mx-auto p-3">
+            <?php 
+            $query = 'SELECT * FROM product';
+            $sth = $pdo->query($query);
+            while($row=$sth->fetch()){
+            ?>
+            <div class="card col-3" style="width: 18rem;">
+                <img class="card-img-top" src="image/<?=htmlspecialchars($row['image'])?>">
+                <div class="card-body">
+                    <div class="box-title">
+                        <h5 class="card-title"><?=htmlspecialchars($row['name'])?></h5>
+                    </div>
+                                
+                    <div class="box-text">
+                        <p class=" pl-1"><?=htmlspecialchars($row['price'])?> VND</p>
+                        <div>
+                        <?php
+                            if(isset($_GET['order_id'])&&($_GET['order_id'])){
+                                echo "<a href=\"edit.php?madd={$row['madd']}&mave={$_GET['mave']}\"><button class='btn-primary'>Đặt Vé</button></a>";
+                            } else if(isset($_GET['user'])&&($_GET['user'])){
+                                echo "<a href=\"datve.php?madd={$row['madd']}\"><button class='btn-primary'>Đặt Vé</button></a>";
+                            }else
+                            echo "<a href=\"add_order.php?id={$row['id']}\"><button class='btn-primary'>Mua luôn</button></a>";
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php }?>
+       </div>
 
     <!-- jquery -->
     <script
