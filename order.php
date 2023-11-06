@@ -74,7 +74,7 @@ $total = $orderModel->getOrderTotals($userId);
 
         <div>
           <button type="button" class="btn btn-info btn-sort" data-sort='desc'>Mới nhất</button>
-          <button type="button" class="btn btn-info btn-sort" data-sort='asc'>Cũ</button>
+          <button type="button" class="btn btn-info btn-sort" data-sort='asc'>Cũ nhất</button>
         </div>
       </div>
         
