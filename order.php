@@ -9,8 +9,14 @@ $orderModel = new Order($pdo);
 $user = $_SESSION['user'];
 
 $userId = $user['id'];
+$sort = '';
 
-$orders = $orderModel->getOrders($userId);
+if (isset($_GET['sort'])) {
+  $sort = $_GET['sort'];
+  echo $sort;
+}
+
+$orders = $orderModel->getOrders($userId, $sort);
 
 $total = $orderModel->getOrderTotals($userId);
 
@@ -63,42 +69,49 @@ $total = $orderModel->getOrderTotals($userId);
 
     <div class='container my-3'>
 
-    <div class='mb-3' style=''>Danh sách đặt hàng</div>
+      <div class='d-flex my-3' style='align-items: center; justify-content: space-between'>
+        <div class='mb-3' style=''>Danh sách đặt hàng</div>
+
+        <div>
+          <button type="button" class="btn btn-info btn-sort" data-sort='desc'>Mới nhất</button>
+          <button type="button" class="btn btn-info btn-sort" data-sort='asc'>Cũ</button>
+        </div>
+      </div>
         
-<table class="table table-striped">
-  <thead>
-    <tr class='bg-primary'>
-      <th scope="col">#</th>
-      <th scope="col">Tên sản phẩm</th>
-      <th scope="col">Giá</th>
-      <th scope="col">Số lượng</th>
-      <th scope="col">Tổng</th>
-      <th scope="col">Ngày tạo</th>
-      <th scope="col"></th>
+      <table class="table table-striped">
+        <thead>
+          <tr class='bg-primary'>
+            <th scope="col">#</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Tổng</th>
+            <th scope="col">Ngày tạo</th>
+            <th scope="col"></th>
 
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-        foreach ($orders as $key => $order) {
-            echo "<tr>";
-            echo "<th scope='row'>" . $key + 1 . "</th>";
-            echo "<td>" . $order['name'] . "</td>";
-            echo "<td>" . $order['price'] . "</td>";
-            echo "<td>" . $order['quantity'] . "</td>";
-            echo "<td>" . $order['quantity'] * $order['price'] . "</td>";
-            echo "<td>" . $order['order_createdAt'] . "</td>";
-            echo "<td>
-            <button type='button' class='btn btn-primary'>Cập nhật</button>
-            <button type='button' class='btn btn-danger'>Xóa</button>
-            </td>";
-            echo "</tr>";
-        }
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+              foreach ($orders as $key => $order) {
+                  echo "<tr>";
+                  echo "<th scope='row'>" . $key + 1 . "</th>";
+                  echo "<td>" . $order['name'] . "</td>";
+                  echo "<td>" . $order['price'] . "</td>";
+                  echo "<td>" . $order['quantity'] . "</td>";
+                  echo "<td>" . $order['quantity'] * $order['price'] . "</td>";
+                  echo "<td>" . $order['order_createdAt'] . "</td>";
+                  echo "<td>
+                  <button type='button' class='btn btn-primary'>Cập nhật</button>
+                  <button type='button' class='btn btn-danger'>Xóa</button>
+                  </td>";
+                  echo "</tr>";
+              }
 
-    ?>
-  </tbody>
-</table>
-<div style='display: flex; align-items: center; justify-content: flex-end; font-weight: 600; font-size: 20px'>Thanh toán: <?=htmlspecialchars($total)?> VND</div>
+          ?>
+        </tbody>
+      </table>
+      <div style='display: flex; align-items: center; justify-content: flex-end; font-weight: 600; font-size: 20px'>Thanh toán: <?=htmlspecialchars($total)?> VND</div>
 
     </div>
    
@@ -125,6 +138,15 @@ $total = $orderModel->getOrderTotals($userId);
     <!-- js -->
     <script type="text/javascript">
      
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        $('.btn-sort').click(function() {
+          const sort = $(this).data('sort');
+          window.location.href = `/projectct467/order.php?sort=${sort}`
+        })
+      })
     </script>
   </body>
 </html>

@@ -16,11 +16,21 @@
 
         public function create($userId, $productId, $quantity) {
             $sql = "CALL CreateOrder(?, ?, ?)";
+
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$userId, $productId, $quantity]);
         }
-        public function getOrders($userId) {
-            $sql = "SELECT o.id AS order_id, o.createdAt as order_createdAt, o.*, p.* FROM `order` o JOIN `product` p ON o.productId = p.id WHERE o.userId = ? ORDER BY o.createdAt DESC";
+        public function getOrders($userId, $sort) {
+            $sql = "";
+            if($sort === 'desc') {
+                $sql = "SELECT o.id AS order_id, o.createdAt as order_createdAt, o.*, p.* FROM `order` o JOIN 
+                `product` p ON o.productId = p.id WHERE o.userId = ? ORDER BY o.createdAt DESC";
+            }
+            else {
+                $sql = "SELECT o.id AS order_id, o.createdAt as order_createdAt, o.*, p.* FROM `order` o JOIN 
+                `product` p ON o.productId = p.id WHERE o.userId = ? ORDER BY o.createdAt ASC";
+            }
+           
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$userId]);
             return $stmt->fetchAll();
