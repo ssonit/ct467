@@ -62,14 +62,14 @@ $_SESSION['user'] = $user;
     include_once('./partial/navbar.php')
     ?>
     <h1 class='text-center'>Sản phẩm</h1>
-        <div class="container row mx-auto p-3">
+        <div class="container row mx-auto p-3 gap-3">
             <?php 
             $query = 'SELECT * FROM product';
             $sth = $pdo->query($query);
             while($row=$sth->fetch()){
             ?>
-            <div class="card col-3" style="width: 18rem;">
-                <img class="card-img-top mt-2" style="border-radius: 10px" src="images/<?=htmlspecialchars($row['image'])?>">
+            <div class="card col-3" style="width: 18rem; border-radius: 14px">
+                <img class="card-img-top mt-2" style="border-radius: 6px" src="images/<?=htmlspecialchars($row['image'])?>">
                 <div class="card-body">
                     <div class="box-title">
                         <h5 class="card-title"><?=htmlspecialchars($row['name'])?></h5>
@@ -80,7 +80,7 @@ $_SESSION['user'] = $user;
                         <div>
                         <?php
                             $id = htmlspecialchars($row['id']);
-                            echo "<button class='btn-primary' data-product-id=$id id='create_order_button'>Mua luôn</button>";
+                            echo "<button class='btn-primary create_order_button' data-product-id=$id id='create_order_button'>Mua luôn</button>";
                         ?>
                         </div>
                     </div>
@@ -116,10 +116,11 @@ $_SESSION['user'] = $user;
      
     </script>
 
-<script>
+    <script>
         $(document).ready(function() {
-            $('#create_order_button').click(function() {
+            $('.create_order_button').click(function() {
               const productId = $(this).data('product-id');
+              console.log({productId})
                 $.ajax({
                     type: 'POST',
                     url: 'add_order.php',
