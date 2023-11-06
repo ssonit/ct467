@@ -87,6 +87,7 @@ $_SESSION['user'] = $user;
                 </div>
             </div>
             <?php }?>
+
        </div>
        <div id="toast" style="display:none; background-color: #333; color: white; padding: 10px; position: fixed; top: 10px; right: 10px; z-index: 999;">
         Đơn hàng đã được tạo!

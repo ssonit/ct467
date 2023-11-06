@@ -12,6 +12,7 @@ $userId = $user['id'];
 
 $orders = $orderModel->getOrders($userId);
 
+$total = $orderModel->getOrderTotals($userId);
 
 
 ?>
@@ -86,16 +87,19 @@ $orders = $orderModel->getOrders($userId);
             echo "<td>" . $order['price'] . "</td>";
             echo "<td>" . $order['quantity'] . "</td>";
             echo "<td>" . $order['quantity'] * $order['price'] . "</td>";
-            echo "<td>" . $order['createdAt'] . "</td>";
+            echo "<td>" . $order['order_createdAt'] . "</td>";
             echo "<td>
             <button type='button' class='btn btn-primary'>Cập nhật</button>
             <button type='button' class='btn btn-danger'>Xóa</button>
             </td>";
             echo "</tr>";
         }
-        ?>
+
+    ?>
   </tbody>
 </table>
+<div style='display: flex; align-items: center; justify-content: flex-end; font-weight: 600; font-size: 20px'>Thanh toán: <?=htmlspecialchars($total)?> VND</div>
+
     </div>
    
 
