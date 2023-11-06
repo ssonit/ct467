@@ -6,14 +6,16 @@
             <a href="/projectct467/" style='text-decoration: none'>SPing</a>
         </div>
             <div class="input-group d-none d-md-flex">
-              <input autocomplete="off" type="text" class="form-control rounded" placeholder="Tìm kiếm"/>
+              <form action="index.php" method="get">
+                <input name='search' autocomplete="off" type="text" class="form-control rounded" placeholder="Tìm kiếm"/>
+              </form>
             </div>
           </div>
           <div  class="d-flex">
             <div  class="">
               <ul class="nav">
                 <li class="nav-item rounded-2 d-flex align-items-center">
-                <a  href="/projectct467/order.php" style='text-decoration: none'>Quản lý đơn hàng</a>
+                <a  href="order.php" style='text-decoration: none'>Quản lý đơn hàng</a>
                 </li>
 
                 <li  class="nav-item rounded-2 dropdown">
