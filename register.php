@@ -44,30 +44,30 @@
  <div class="wrapper-register">
     <div class="form-box register">
         <h3 class="text-center">Register</h3>
-        <form action="#" method="POST">
+        <form action="contact.php" method="POST">
             <div class="input-box">
                 <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
-                <input type="text" name="username" required>
+                <input type="text" name="username" style='color: black;' required>
                 <label>User</label>
             </div>
             <div class="input-box">
                 <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
-                <input type="email" name="email" required>
+                <input type="email" name="email" style='color: black;' required>
                 <label>Email</label>
             </div>
             <div class="input-box">
                 <span class="icon"><ion-icon name="call-outline"></ion-icon></span>
-                <input type="text" name="phone" required>
+                <input type="text" name="phone" style='color: black;' required>
                 <label>Phone</label>
             </div>
             <div class="input-box">
                 <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                <input type="password" name="password" required>
+                <input type="password" name="password" style='color: black;' required>
                 <label>Password</label>
             </div>
             <div class="input-box">
                 <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                <input type="password" name="password2" required>
+                <input type="password" name="password2" style='color: black;' required>
                 <label>Confirm Password</label>
             </div>
             <div class="remember-forgot">
@@ -76,7 +76,7 @@
             <button type="submit" class="btn" name="Register">Register</button>
             <div class="login-register">
                 <p>Already have an account?
-                    <a href="/projectct467/login.php" class="login-link">Login</a>
+                    <a href="./login.php" class="login-link">Login</a>
                 </p>
             </div>
         </form>

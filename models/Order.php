@@ -20,7 +20,7 @@
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$userId, $productId, $quantity]);
         }
-        public function getOrders($userId, $sort) {
+        public function getOrders($userId, $sort = 'desc') {
             $sql = "";
             if($sort === 'desc') {
                 $sql = "SELECT o.id AS order_id, o.createdAt as order_createdAt, o.*, p.* FROM `order` o JOIN 
@@ -40,6 +40,11 @@
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$userId]);
             return $stmt->fetchColumn();
+        }
+        public function deleteOrder($id){
+            $sql = "DELETE FROM `order` WHERE order.id =?";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([$id]);
         }
     }
     

@@ -2,13 +2,7 @@
 
 session_start();
 require_once './config/database.php';
-require_once './models/User.php';
 
-$userModel = new User($pdo);
-
-$user = $userModel->getById(1);
-
-$_SESSION['user'] = $user;
 
 
 
@@ -121,7 +115,6 @@ $_SESSION['user'] = $user;
         $(document).ready(function() {
             $('.create_order_button').click(function() {
               const productId = $(this).data('product-id');
-              console.log({productId})
                 $.ajax({
                     type: 'POST',
                     url: 'add_order.php',

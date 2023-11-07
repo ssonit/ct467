@@ -44,15 +44,15 @@
   <div class="wrapper-login">
     <div class="form-box login">
         <h3 class="text-center">Login</h3>
-        <form action="#" method="POST">
+        <form action="contact.php" method="POST">
             <div class="input-box">
                 <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
-                <input type="text" name="username" required>
+                <input type="text" name="username" style='color: black;' required>
                 <label>User</label>
             </div>
             <div class="input-box">
                 <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                <input type="password" name="password" required>
+                <input type="password" name="password"style='color: black;'  required>
                 <label>Password</label>
             </div>
             <div class="remember-forgot">
@@ -62,7 +62,7 @@
             <button type="submit" class="btn" name="login">Login</button>
             <div class="login-register">
                 <p>Don't have an account?
-                    <a href="/projectct467/register.php" class="register-link">Register</a>
+                    <a href="./register.php" class="register-link">Register</a>
                 </p>
             </div>
         </form>

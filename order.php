@@ -4,21 +4,25 @@ session_start();
 require_once './config/database.php';
 require_once './models/Order.php';
 
+if(!isset($_SESSION['user'])) header('Location: ./login.php');
+
 $orderModel = new Order($pdo);
 
 $user = $_SESSION['user'];
 
 $userId = $user['id'];
+
+
 $sort = '';
 
 if (isset($_GET['sort'])) {
   $sort = $_GET['sort'];
-  echo $sort;
 }
 
 $orders = $orderModel->getOrders($userId, $sort);
 
 $total = $orderModel->getOrderTotals($userId);
+
 
 
 ?>
@@ -94,6 +98,7 @@ $total = $orderModel->getOrderTotals($userId);
         <tbody>
           <?php
               foreach ($orders as $key => $order) {
+                  $id = htmlspecialchars($order['order_id']);
                   echo "<tr>";
                   echo "<th scope='row'>" . $key + 1 . "</th>";
                   echo "<td>" . $order['name'] . "</td>";
@@ -103,7 +108,7 @@ $total = $orderModel->getOrderTotals($userId);
                   echo "<td>" . $order['order_createdAt'] . "</td>";
                   echo "<td>
                   <button type='button' class='btn btn-primary'>Cập nhật</button>
-                  <button type='button' class='btn btn-danger'>Xóa</button>
+                  <button type='button' class='btn btn-danger btn-delete-order' data-order-id=$id >Xóa</button>
                   </td>";
                   echo "</tr>";
               }
@@ -144,8 +149,24 @@ $total = $orderModel->getOrderTotals($userId);
       $(document).ready(function() {
         $('.btn-sort').click(function() {
           const sort = $(this).data('sort');
-          window.location.href = `/projectct467/order.php?sort=${sort}`
+          window.location.href = `./order.php?sort=${sort}`
         })
+
+
+        $('.btn-delete-order').click(function() {
+          const id = $(this).data('order-id');
+          $.ajax({
+            type: 'POST',
+            url: 'delete_order.php',
+            data: { id }, 
+            success: function() {
+              alert('Xóa đơn hàng thành công')
+              window.open('./order.php', '_self')
+            }
+          });
+        })
+
+
       })
     </script>
   </body>
