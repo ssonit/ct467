@@ -6,7 +6,7 @@ define('DB_USER', 'newuser');
 define('DB_PASSWORD', 'mysqlct467');
 
 $host = 'localhost';
-$dbname = 'project_ct467';
+$dbname = 'ct467';
 $username = 'root';
 $password = 'phamminhkhanh';
 

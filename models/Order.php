@@ -15,18 +15,18 @@
         }
 
         public function create($userId, $productId, $quantity) {
-            $sql = "INSERT INTO `order` (userId, productId, quantity) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO `orders` (userId, productId, quantity) VALUES (?, ?, ?)";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$userId, $productId, $quantity]);
         }
         public function getOrders($userId) {
-            $sql = "SELECT o.id AS order_id, o.*, p.* FROM `order` o JOIN `product` p ON o.productId = p.id WHERE o.userId = ? ORDER BY o.createdAt DESC";
+            $sql = "SELECT o.id AS order_id, o.*, p.* FROM `orders` o JOIN `product` p ON o.productId = p.id WHERE o.userId = ? ORDER BY o.createdAt DESC";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$userId]);
             return $stmt->fetchAll();
         }
         public function deleteOrder($id){
-            $sql = "DELETE FROM `order` WHERE order.id =?";
+            $sql = "DELETE FROM `orders` WHERE id =?";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute([$id]);
             return $stmt->fetchAll();

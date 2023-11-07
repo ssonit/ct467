@@ -1,6 +1,9 @@
 <?php
 session_start();
 include_once('../config/database.php');
+
+
+
 if (isset($_POST['login'])) {
 
     // session_destroy();
@@ -13,7 +16,7 @@ if (isset($_POST['login'])) {
     $count = $stmt->rowCount();
     if ($count > 0) {
         $row_data = $result_login;
-        $_SESSION['dangnhap'] = $row_data['username'];
+        $_SESSION['dangnhap'] = $row_data;
         if ($row_data)
             echo '<script>alert("Đăng nhập thành công")</script>';
         echo '<script>window.open("../index.php","_self")</script>';

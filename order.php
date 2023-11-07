@@ -6,15 +6,15 @@ require_once './models/Order.php';
 
 $orderModel = new Order($pdo);
 
-$user = $_SESSION['user'];
-
+$user = $_SESSION['dangnhap'];
+// print_r ($user);
 $userId = $user['id'];
 
 $orders = $orderModel->getOrders($userId);
 
 if(isset($_GET['delete'])){
   $order = $orderModel->deleteOrder($_GET['delete']);
-  echo "<script>alert('Xóa đơn hàng thành công')</script>";
+  echo "<script>alert('Xóa sản phẩm thành công')</script>";
   echo "<script>window.open('order.php', '_self')</script>";
 }
 

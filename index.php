@@ -51,7 +51,8 @@ require_once './config/database.php';
   </head>
   <body>
     <?php
-    include_once('./partial/navbar.php')
+    include_once('./partial/navbar.php');
+    // echo "$_SESSION['dangnhap']";
     ?>
    
 
