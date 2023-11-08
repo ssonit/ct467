@@ -24,7 +24,6 @@ $orders = $orderModel->getOrders($userId, $sort);
 $total = $orderModel->getOrderTotals($userId);
 
 
-
 ?>
 
 
@@ -107,7 +106,7 @@ $total = $orderModel->getOrderTotals($userId);
                   echo "<td>" . $order['quantity'] * $order['price'] . "</td>";
                   echo "<td>" . $order['order_createdAt'] . "</td>";
                   echo "<td>
-                  <button type='button' class='btn btn-primary'>Cập nhật</button>
+                  <button type='button' class='btn btn-primary' data-update=$id>Cập nhật</button>
                   <button type='button' class='btn btn-danger btn-delete-order' data-order-id=$id >Xóa</button>
                   </td>";
                   echo "</tr>";

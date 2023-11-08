@@ -4,9 +4,6 @@
     require_once './models/Order.php';
 
     $orderModel = new Order($pdo);
-
-
-
     if (isset($_POST['productId']) && $_SESSION['user']) {
         $productId = $_POST['productId'];
         $userId = $_SESSION['user']['id'];
