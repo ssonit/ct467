@@ -1,4 +1,10 @@
+<?php
 
+session_start();
+
+require_once './config/database.php';
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -58,6 +64,10 @@
     </tr>
   </thead>
   <tbody>
+    <!-- Hiển thị order -->
+    <?php
+    $user=$_SESSION['user'];
+    ?>
     <tr>
       <th scope="row">1</th>
       <td>Mark</td>

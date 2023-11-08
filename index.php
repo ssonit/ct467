@@ -58,7 +58,7 @@ require_once './config/database.php';
             <?php
             if(isset($_GET['search']) && ($_GET['search'])){
               $data=$_GET['search'];
-              $query = "SELECT * FROM product where 'name' like '%".$data."%'";
+              $query = "SELECT * FROM product where name like '%".$data."%'";
             }else{
               $query = 'SELECT * FROM product';
             }

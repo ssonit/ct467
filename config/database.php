@@ -2,13 +2,13 @@
 
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'ct467');
-define('DB_USER', 'newuser');
-define('DB_PASSWORD', 'mysqlct467');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
 
 $host = 'localhost';
 $dbname = 'ct467';
-$username = 'newuser';
-$password = 'mysqlct467';
+$username = 'root';
+$password = '';
 
 $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
 

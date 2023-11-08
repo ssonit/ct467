@@ -3,7 +3,7 @@
         <div class="d-flex align-items-center py-3 justify-content-between">
           <div  class="d-flex align-items-center">
             <div  class="logo gradient-text" style='margin-right: 60px;'>
-            <a href="/projectct467/" style='text-decoration: none'>SPing</a>
+            <a href="./index.php" style='text-decoration: none'>SPing</a>
         </div>
             <div class="input-group d-none d-md-flex">
               <form action="index.php" method="get">
