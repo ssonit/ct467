@@ -1,10 +1,34 @@
+
 <?php
 
 session_start();
-
 require_once './config/database.php';
+require_once './models/Order.php';
+
+if(!isset($_SESSION['user'])) header('Location: ./login.php');
+
+$orderModel = new Order($pdo);
+
+$user = $_SESSION['user'];
+
+$userId = $user['id'];
+
+
+$sort = '';
+
+if (isset($_GET['sort'])) {
+  $sort = $_GET['sort'];
+}
+
+$orders = $orderModel->getOrders($userId, $sort);
+
+$total = $orderModel->getOrderTotals($userId);
+
+
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -50,36 +74,51 @@ require_once './config/database.php';
 
     <div class='container my-3'>
 
-    <div class='mb-3' style=''>Danh sách đặt hàng</div>
-        
-<table class="table table-striped">
-  <thead>
-    <tr class='bg-primary'>
-      <th scope="col">#</th>
-      <th scope="col">Tên sản phẩm</th>
-      <th scope="col">Số lượng</th>
-      <th scope="col">Ngày tạo</th>
-      <th scope="col"></th>
+      <div class='d-flex my-3' style='align-items: center; justify-content: space-between'>
+        <div class='mb-3' >Danh sách đặt hàng</div>
 
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Hiển thị order -->
-    <?php
-    $user=$_SESSION['user'];
-    ?>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>1</td>
-      <td>15-02-2023</td>
-      <td>
-      <button type="button" class="btn btn-primary">Cập nhật</button>
-      <button type="button" class="btn btn-danger">Xóa</button>
-      </td>
-</tr>
-  </tbody>
-</table>
+        <div>
+          <button type="button" class="btn btn-info btn-sort" data-sort='desc'>Mới nhất</button>
+          <button type="button" class="btn btn-info btn-sort" data-sort='asc'>Cũ nhất</button>
+        </div>
+      </div>
+        
+      <table class="table table-striped">
+        <thead>
+          <tr class='bg-primary'>
+            <th scope="col">#</th>
+            <th scope="col">Tên sản phẩm</th>
+            <th scope="col">Giá</th>
+            <th scope="col">Số lượng</th>
+            <th scope="col">Tổng</th>
+            <th scope="col">Ngày tạo</th>
+            <th scope="col"></th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <?php 
+              foreach ($orders as $key => $order) {
+                  $id = htmlspecialchars($order['order_id']);
+                  echo "<tr>";
+                  echo "<th scope='row'>" . $key + 1 . "</th>";
+                  echo "<td>" . $order['name'] . "</td>";
+                  echo "<td>" . number_format($order['price'], 0, ',', '.') . ' vnđ' . "</td>";
+                  echo "<td><input type='number' id='quantity' value='". $order['quantity']."'</td>";
+                  echo "<td>" . number_format($order['quantity'] * $order['price'], 0, ',', '.') . ' vnđ' . "</td>";
+                  echo "<td>" . $order['order_createdAt'] . "</td>";
+                  echo "<td>
+                  <button type='button' class='btn btn-primary btn-update-order' data-update=$id>Cập nhật</button>
+                  <button type='button' class='btn btn-danger btn-delete-order' data-order-id=$id >Xóa</button>
+                  </td>";
+                  echo "</tr>";
+              }
+
+          ?>
+        </tbody>
+      </table>
+      <div style='display: flex; align-items: center; justify-content: flex-end; font-weight: 600; font-size: 20px'>Thanh toán: <?=htmlspecialchars(number_format($total, 0, ',', '.') . ' vnđ')?> </div>
+
     </div>
    
 
@@ -106,5 +145,46 @@ require_once './config/database.php';
     <script type="text/javascript">
      
     </script>
+
+    <script>
+      $(document).ready(function() {
+        $('.btn-sort').click(function() {
+          const sort = $(this).data('sort');
+          window.location.href = `./order.php?sort=${sort}`
+        })
+
+
+        $('.btn-delete-order').click(function() {
+          const id = $(this).data('order-id');
+          $.ajax({
+            type: 'POST',
+            url: 'delete_order.php',
+            data: { id }, 
+            success: function() {
+              alert('Xóa đơn hàng thành công')
+              window.open('./order.php', '_self')
+            }
+          });
+        })
+
+        $('.btn-update-order').click(function() {
+          const id = $(this).data('update');
+          const quantity = $('#quantity').val();
+          $.ajax({
+            type: 'POST',
+            url: 'update.php',
+            data: { id : id,
+                    quantity : quantity }, 
+            success: function() {
+              alert('Cập nhật hàng thành công')
+              window.open('./order.php', '_self')
+            }
+          });
+        })
+
+
+      })
+    </script>
   </body>
 </html>
+

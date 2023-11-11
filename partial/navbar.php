@@ -13,32 +13,17 @@
           </div>
           <div  class="d-flex">
             <div  class="">
-              <ul class="nav">
+              <ul class="nav d-flex gap-3">
                 <li class="nav-item rounded-2 d-flex align-items-center">
-                <a  href="order.php" style='text-decoration: none'>Quản lý đơn hàng</a>
+                  <a  href="./order.php" style='text-decoration: none'>Quản lý đơn hàng</a>
                 </li>
 
-                <li  class="nav-item rounded-2 dropdown">
-                  <a
-                    class="nav-link dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Cài Đặt
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a class="dropdown-item" href="/profile.php">Thông tin cá nhân</a>
-                    </li>
-                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#resetPWModal" >Đổi mật khẩu</a></li>
-                    <li id='logout'>
-                      <form method="POST" action="/logout.php" >
-                        <button type="submit" class="w-100 text-start px-3" style="border: 0; background-color: white;">Đăng xuất</button>
-                      </form>
-                    </li>
-                  </ul>
+                <li class="nav-item rounded-2 d-flex align-items-center">
+                  <?php if(isset($_SESSION['dangnhap'])){ ?>
+                  <a  href="./logout.php" style='text-decoration: none'>Đăng xuất</a>
+                  <?php }elseif(!isset($_SESSION['dangnhap'])){ ?>
+                    <a  href="./login.php" style='text-decoration: none'>Đăng nhập</a>
+                    <?php }?>
                 </li>
               </ul>
             </div>

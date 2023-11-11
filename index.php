@@ -1,8 +1,10 @@
 <?php
 
 session_start();
-
 require_once './config/database.php';
+
+
+
 
 ?>
 
@@ -46,16 +48,16 @@ require_once './config/database.php';
     <link
       rel="stylesheet"
       type="text/css"
-      href="/css/style.css"
+      href="./public/css/login.css"
     />
   </head>
   <body>
     <?php
     include_once('./partial/navbar.php')
     ?>
-    <h1 class='text-center'>Sản phẩm</h1>
-        <div class="container row mx-auto p-3">
-            <?php
+    <h1 class='text-center text-white'>Sản phẩm</h1>
+        <div class="container row mx-auto p-3 gap-3">
+            <?php 
             if(isset($_GET['search']) && ($_GET['search'])){
               $data=$_GET['search'];
               $query = "SELECT * FROM product where name like '%".$data."%'";
@@ -65,32 +67,30 @@ require_once './config/database.php';
             $sth = $pdo->query($query);
             while($row=$sth->fetch()){
             ?>
-           <div class="col-3 mt-3">
-            <div class="card" style="width:100%;">
-                  <img class="card-img-top" src="image/<?=htmlspecialchars($row['image'])?>">
-                  <div class="card-body">
-                      <div class="box-title">
-                          <h5 class="card-title"><?=htmlspecialchars($row['name'])?></h5>
-                      </div>           
-                      <div class="box-text">
-                          <p class=" pl-1"><?=htmlspecialchars($row['price'])?> VND</p>
-                          <div>
-                          <?php
-                              if(isset($_GET['order_id'])&&($_GET['order_id'])){
-                                  echo "<a href=\"edit.php?madd={$row['madd']}&mave={$_GET['mave']}\"><button class='btn-primary'>Đặt Vé</button></a>";
-                              } else if(isset($_GET['user'])&&($_GET['user'])){
-                                  echo "<a href=\"datve.php?madd={$row['madd']}\"><button class='btn-primary'>Đặt Vé</button></a>";
-                              }else
-                              echo "<a href=\"add_order.php?id={$row['id']}\"><button class='btn-primary'>Mua luôn</button></a>";
-                              ?>
-                          </div>
-                      </div>
-                  </div>
+            <div class="card col-3" style="width: 18rem; border-radius: 14px ">
+                <img class="card-img-top mt-2" style="border-radius: 6px; height: 150px;" src="images/<?=htmlspecialchars($row['image'])?>">
+                <div class="card-body">
+                    <div class="box-title">
+                        <h5 class="card-title"><?=htmlspecialchars($row['name'])?></h5>
+                    </div>
+                                
+                    <div class="box-text">
+                        <p class=" pl-1"><?=htmlspecialchars(number_format($row['price'], 0, ',', '.') . ' vnđ')?> </p>
+                        <div>
+                        <?php
+                            $id = htmlspecialchars($row['id']);
+                            echo "<button class='btn-primary create_order_button' data-product-id=$id id='create_order_button'>Mua luôn</button>";
+                        ?>
+                        </div>
+                    </div>
                 </div>
-           </div>
+            </div>
             <?php }?>
-       </div>
 
+       </div>
+       <div id="toast" style="display:none; background-color: #333; color: white; padding: 10px; position: fixed; top: 10px; right: 10px; z-index: 999;">
+        Đơn hàng đã được tạo!
+    </div>
     <!-- jquery -->
     <script
       src="https:/code.jquery.com/jquery-3.6.3.min.js"
@@ -113,6 +113,25 @@ require_once './config/database.php';
     <!-- js -->
     <script type="text/javascript">
      
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('.create_order_button').click(function() {
+              const productId = $(this).data('product-id');
+                $.ajax({
+                    type: 'POST',
+                    url: 'add_order.php',
+                    data: { productId }, 
+                    success: function(response) {
+                        $('#toast').show();
+                        setTimeout(function() {
+                            $('#toast').hide();
+                        }, 3000);
+                    }
+                });
+            });
+        });
     </script>
   </body>
 </html>
